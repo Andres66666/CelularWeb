@@ -1,0 +1,35 @@
+.contenedorprincipal{
+    background-image: url(https://www.xtrafondos.com/wallpapers/vertical/spirit-blossom-tristana-skin-league-of-legends-10803.jpg);
+    background-size: auto;
+
+    height: 104%;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.top{
+    display: flex;
+    width: 85%;
+    height: 15%;
+}
+.icon{
+    flex: 25%;
+    flex-wrap: wrap;
+    padding: 15px;
+    text-align: center;
+    margin-left: 5px;
+}
+.name{
+    text-decoration: none;
+    color: rgb(133, 209, 209);
+    font-size: 16px;
+}
+.displastime{
+    background-color: rgb(rgb(175, 80, 80), rgb(106, 189, 106), rgb(120, 120, 201));
+    width: 100%;
+    height: 30%;
+    margin-top: 3%;
+    overflow: hidden;
+    text-align: center;
+    color: aliceblue;
+}
