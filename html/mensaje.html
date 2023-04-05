@@ -25,37 +25,60 @@
       </div>
 
 <script type="text/javascript">
-const messageForm = document.querySelector('.message-form');
-const messageInput = document.querySelector('#message-input');
-const messagesDiv = document.querySelector('.messages');
+const CACHE_NAME = 'mensaje-cache';
 
-messageForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const messageText = messageInput.value;
-  const newMessage = document.createElement('p');
-  newMessage.textContent = messageText;
-  messagesDiv.appendChild(newMessage);
-  messageInput.value = '';
-
-  // Envía el mensaje al servidor
-  fetch('/enviar_mensaje', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: messageText })
-  });
+// Escucha el evento 'install' para crear la caché
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        return cache.addAll([
+          '/index.html',
+          '/script.js',
+          '/styles.css',
+        ]);
+      })
+  );
 });
 
-// Carga los mensajes del servidor al iniciar la página
-fetch('/ver_mensajes')
-  .then(response => response.json())
-  .then(messages => {
-    messages.forEach(message => {
-      const newMessage = document.createElement('p');
-      newMessage.textContent = message;
-      messagesDiv.appendChild(newMessage);
-    });
-  });
+// Escucha el evento 'fetch' para recuperar los mensajes de la caché
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        if (response) {
+          return response;
+        }
+
+        return fetch(event.request)
+          .then((response) => {
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            const responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          });
+      })
+  );
+});
+
+// Escucha el evento 'message' para guardar los mensajes en la caché
+self.addEventListener('message', (event) => {
+  if (event.data.message) {
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        cache.add(event.data.message);
+      });
+  }
+});
+
 </script>
   </body>
 </html>
