@@ -35,73 +35,73 @@ var eliminar= document.getElementById('eliminar');
 
 //Eventos de click
 uno.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "1";
     historial.textContent += "1";
 }
 dos.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "2";
     historial.textContent += "2";
 }
 tres.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "3";
     historial.textContent += "3";
 }
 cuatro.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "4";
     historial.textContent += "4";
 }
 cinco.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "5";
     historial.textContent += "5";
 }
 seis.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "6";
     historial.textContent += "6";
 }
 siete.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "7";
     historial.textContent += "7";
 }
 ocho.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "8";
     historial.textContent += "8";
 }
 nueve.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "9";
     historial.textContent += "9";
 }
 asteristico.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "*";
     historial.textContent += "*";
 }
 cero.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "0";
     historial.textContent += "0";
 }
 numeral.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
     resultado.textContent = resultado.textContent + "#";
     historial.textContent += "#";
@@ -109,7 +109,7 @@ numeral.onclick = function(e){
 
 
 mensaje.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
+    click= new Audio("../audios/sour.mp3");
     click.play();
 }
 
