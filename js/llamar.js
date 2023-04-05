@@ -99,13 +99,18 @@ numeral.onclick = function(e){
 }
 
 llamar.onclick = function(e){  
-    // Capturar el número ingresado
-    const numero = resultado.textContent;  //Cree un objeto JSON con el número ingresado:
+     // Capturar el número ingresado
+     const numero = resultado.textContent;  
+     //Crear array de nombres
+     const nombres = ['Andres', 'Carlos', 'Ana', 'Luisa', 'Pedro', 'Maria'];
+     //Seleccionar un nombre aleatorio
+     const nombreAleatorio = nombres[Math.floor(Math.random() * nombres.length)];
+
     if(resultado.textContent.length>8){
-        document("numero incorrecto")
+        alert("numero incorrecto")
     }else{
         llamando();
-        document("huste se comunico con el numero " + resultado.textContent);
+        historial.textContent = nombreAleatorio + " " + resultado.textContent;
     } 
 }
 

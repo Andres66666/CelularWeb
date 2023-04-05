@@ -42,13 +42,18 @@
                     <td><button id="eliminar">⌫</button></td>
                 </tr>
         </table>
-        <button onclick="ajax_get_json()">M</button>  
-        <button type="button" onclick="agregar_datos()">A</button>
-        <div id="info"></div>
+        <button type="button" onclick="ajax_json_array()">M</button>
 
-        <script type="text/javascript">
-    var r = document.getElementById("info");
+	<div id="info"></div>
+
+	<form>
+		<button type="button" onclick="agregar_datos()">A</button>
+	</form>
+
+	<script type="text/javascript">
+	var resultado = document.getElementById("info");
 	var datos = [];
+
 	function ajax_json_array() {
 		var xmlhttp;
 
@@ -72,25 +77,23 @@
 	}
 
 	function actualizar_datos() {
-		r.innerHTML = "";
+		resultado.innerHTML = "";
 		for (var i in datos) {
-			r.innerHTML += "se llama "+ datos[i].nombre+" tiene el telefono "+datos[i].telefono +" "+"<hr/>";
+			resultado.innerHTML += "se llama  "+ datos[i].nombre+" sy tiene "+datos[i].telefono +"<br/>";
 		}
 	}
 
 	function agregar_datos() {
-		var nombre = document.getElementById("nombre").value;
+		var nombre = document.getElementById("resultado").value;
 		var nuevo_dato = {
-			nombre: "andres",
-			telefono:resultado.textContent,
-			
+			nombre: "....",
+			telefono: "72934737"
 		};
 		datos.push(nuevo_dato);
 		actualizar_datos();
-		document.getElementById("nombre").value = "";
+		document.getElementById("resultado").value = "";
 	}
-
-        </script>
+	</script>
         
 </body>
 </html>
