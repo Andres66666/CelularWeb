@@ -1,51 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo Celular Ajax y Json</title>
+    <title>interfazinicial</title>
+    <link rel="stylesheet" type="text/css" href="css/interfazinicial.css">
 
-    <link rel="stylesheet" type="text/css" href="css/botones.css">
-    <script type="text/javascript" src="js/llamar.js"></script>
-
-    <style>
-        body{
-            background-color:gray;
-        }
-    </style>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body onload="init();">
+    
         <table class="calculadora">
-                <tr>
-                <td colspan="3"><span id="resultado"></span></td>
-                </tr>
-                <tr>
-                <td colspan="3"><span id="historial"></span></td>
-                </tr>
-                <tr>
-                    <td><button id="uno">1</button></td><td><button id="dos">2</button></td><td><button id="tres">3</button></td>
-                </tr>
-                <tr>
-                    <td><button id="cuatro">4</button></td><td><button id="cinco">5</button></td><td><button id="seis">6</button></td>
-                </tr>
-                <tr>
-                    <td><button id="siete">7</button></td><td><button id="ocho">8</button></td><td><button id="nueve">9</button></td>
-                </tr>
-                <tr>
-                    <td><button id="asteristico">*</button></td><td><button id="cero">0</button></td><td><button id="numeral"><strong>#</strong></button></td>
-                </tr>
-                <tr>
-                    <td><button id="mensaje">💬</button></td><td><button id="llamar">📞</button></td><td><button id="ver">👁</button></td>
-                </tr>
-                <tr>
-                    <td><button id="atras">◁</button></td><td><button id="salir">◉</button></td><td><button id="eliminar"> ⌫</button></td>
-                </tr>
-        </table>
-
+        <tr>
+        <td colspan="3">
+            <strong>
+                <span id="resultado">
+                    <p>13:00 p.m<br>Miercoles 5 de Abril</p>
+                </span>
+            </strong>
+            
+        </td>
+        </tr>
+        <tr>
+        <td colspan="3">
+            <span id="historial">
+                <p>💬📩📞🌐</p>
+            </span>
+        </td>
+        </tr>
         
+        <tr>
+            <td><button id="mensaje">💬</button></td><td><a href="html/llamar.html"><button id="llamar">📞</button></a></td><td><button id="ver">👁</button></td>
+        </tr>
+        <tr class="tr">
+            <td><button id="atras">◁</button></td><td><button id="salir">◉</button></td><td><button id="eliminar"> ⌫</button></td>
+        </tr>
+    </table>
+ 
+    
 </body>
 </html>
-
-

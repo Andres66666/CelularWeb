@@ -107,11 +107,11 @@ numeral.onclick = function(e){
     historial.textContent += "#";
 }
 
-
+/*
 mensaje.onclick = function(e){
-    click= new Audio("../audios/sour.mp3");
+    click= new Audio("../audios/click.mp3");
     click.play();
-}
+}*/
 
 
 llamar.onclick = function(e){
@@ -143,11 +143,11 @@ function colgar(audio, button) {
 
 
 
-
+/*
 ver.onclick = function(e){
     click= new Audio("../audios/click.mp3");
     click.play();
-}
+}*/
 atras.onclick = function(e){
     click= new Audio("../audios/click.mp3");
     click.play();

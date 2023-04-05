@@ -1,35 +1,51 @@
-.contenedorprincipal{
-    background-image: url(https://www.xtrafondos.com/wallpapers/vertical/spirit-blossom-tristana-skin-league-of-legends-10803.jpg);
-    background-size: auto;
+.calculadora{
+    background-image: url(https://i.pinimg.com/236x/d0/3c/22/d03c224feb61b074bc4e092364e9e4cf.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 1.5;
+    
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: -200px;
 
-    height: 104%;
-    width: 100%;
-    padding: 0;
-    overflow: hidden;
-}
-.top{
-    display: flex;
-    width: 85%;
-    height: 15%;
-}
-.icon{
-    flex: 25%;
-    flex-wrap: wrap;
-    padding: 15px;
+    width:290px;
+    height:640px;
+    border-radius: 25px;
+
+    margin-top: 100px;
+    margin-left: 100px;
+    }
+    .calculadora td button{
+    display:block;
+    width:70px;
+    height: 70px;
+    font-size: 30px;
+    border-radius: 50px;
+    margin-left: 3px;
+    
+    }
+    #resultado{
     text-align: center;
-    margin-left: 5px;
-}
-.name{
-    text-decoration: none;
-    color: rgb(133, 209, 209);
-    font-size: 16px;
-}
-.displastime{
-    background-color: rgb(rgb(175, 80, 80), rgb(106, 189, 106), rgb(120, 120, 201));
-    width: 100%;
-    height: 30%;
-    margin-top: 3%;
-    overflow: hidden;
+    font-size: 25px;
+    }
+    #resultado p{
+        color: #000000;
+        font-size: 20px;
+    }
+    #historial{
+    font-size: 25px;
     text-align: center;
-    color: aliceblue;
-}
+    margin: auto;
+    } 
+    #asteristico{
+        font-size: 90px;
+    }
+    button{
+        background-color: #000000;
+        color: aliceblue;
+        margin-bottom: -30px;
+    }
+    #llamar{
+        background-color: rgb(38, 202, 106);
+    }
