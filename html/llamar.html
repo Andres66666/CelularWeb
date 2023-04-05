@@ -10,15 +10,17 @@
     <link rel="stylesheet" type="text/css" href="../css/botones.css">
     <script type="text/javascript" src="../js/llamar.js"></script>
 
+
 </head>
 <body onload="init();">
         <table class="calculadora">
-                <tr>
-                <td colspan="3"><span id="resultado"></span></td>
-                </tr>
+                
                 <tr>
                 <td colspan="3"><span id="historial"></span></td>
                 </tr>
+                <tr>
+                    <td colspan="3"><span id="resultado"></span></td>
+                    </tr>
                 <tr>
                     <td><button id="uno">1</button></td><td><button id="dos">2</button></td><td><button id="tres">3</button></td>
                 </tr>
@@ -35,10 +37,23 @@
                     <td></td><td><button id="llamar">📞</button></td><td></td>
                 </tr>
                 <tr>
-                    <td><button id="atras">◁</button></td><td><button id="salir">◉</button></td><td><button id="eliminar"> ⌫</button></td>
+                    <td><a href="../index.html" class="button"><button id="atras">◁</button></a></td>
+                    <td><a href="../index.html" class="button"><button id="salir">◉</button></a></td>
+                    <td><button id="eliminar">⌫</button></td>
                 </tr>
         </table>
+        <div id="info"></div>
 
+
+<!--
+     <form id="llamar-form">
+            <label for="telefono">Ingrese su número de teléfono:</label>
+            <input type="text" id="telefono" name="telefono">
+            <button type="submit" id="llamar-btn">LLAMAR</button>
+          </form>
+
+-->
+       
         
 </body>
 </html>

@@ -1,11 +1,5 @@
-var operandoa;
-var operandob;
-var operacion;
 
-
-function init(){  // inicializa todas las funciones de lo botones varaibles  
-//variables
-
+function init(){ 
 var resultado = document.getElementById('resultado');
 var historial = document.getElementById('historial');
 
@@ -23,10 +17,7 @@ var asteristico = document.getElementById('asteristico');
 var cero = document.getElementById('cero');
 var numeral = document.getElementById('numeral');
 
-var mensaje = document.getElementById('mensaje');
 var llamar = document.getElementById('llamar'); 
-var ver = document.getElementById('ver');
-
 
 var atras = document.getElementById('atras');
 var salir = document.getElementById('salir')
@@ -107,17 +98,55 @@ numeral.onclick = function(e){
     historial.textContent += "#";
 }
 
-/*
-mensaje.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
-    click.play();
-}*/
+llamar.onclick = function(e){  
+    // Capturar el número ingresado
+    const numero = resultado.textContent;  //Cree un objeto JSON con el número ingresado:
+    if(resultado.textContent.length>8){
+        document("numero incorrecto")
+    }else{
+        llamando();
+        document("huste se comunico con el numero " + resultado.textContent);
+        ajax_json_array();
+    } 
+    
 
-
-llamar.onclick = function(e){
-    llamando();
+    
 }
+var resultado = document.getElementById("info");
+function ajax_json_array()
+    {
+        var xmlhttp;
 
+        if(window.XMLHttpRequest)
+        {
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) 
+            {
+                //alert(xmlhttp.responseText);
+                var data = JSON.parse(xmlhttp.responseText);  //convierte una cadena en un objeto JSON
+                console.log(data);
+                if (resultado.innerHTML === "")
+                {
+                    for (var i in data) 
+                    {
+                        resultado.innerHTML +="Mi "+ data[i].Parentezco+" se llama "+data[i].Nombre +" "+data[i].Apellido +"<hr/>";
+                        console.log(data[i].Nombre);
+                    }
+                }
+            }
+        }
+    
+    xmlhttp.open("GET" , "numeros.json" , true);  
+    xmlhttp.send();
+    }
 function llamando(){
     const llamarBtn = document.getElementById("llamar");
     const click = new Audio("../audios/llamando.mp3");
@@ -139,15 +168,6 @@ function colgar(audio, button) {
     button.style.backgroundColor = "";
 }
 
-
-
-
-
-/*
-ver.onclick = function(e){
-    click= new Audio("../audios/click.mp3");
-    click.play();
-}*/
 atras.onclick = function(e){
     click= new Audio("../audios/click.mp3");
     click.play();
@@ -163,9 +183,6 @@ eliminar.onclick = function(e){
     eliminarNumeroHistorial();
 }
 
-
-
-
 function eliminarNumero() {
     let resultado = document.getElementById("resultado").innerHTML;
     let nuevoResultado = resultado.slice(0, -1);
@@ -177,4 +194,41 @@ function eliminarNumeroHistorial() {
     let nuevoResultado = historial.slice(0, -1);
     document.getElementById("historial").innerHTML = nuevoResultado;
 }
+}
+
+var resultado = document.getElementById("info");
+
+		function ajax_json_array()
+		{
+			var xmlhttp;
+
+			if(window.XMLHttpRequest)
+			{
+				xmlhttp = new XMLHttpRequest();
+			}
+			else
+			{
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			xmlhttp.onreadystatechange = function()
+			{
+				if (xmlhttp.readyState === 4 && xmlhttp.status === 200) 
+				{
+					//alert(xmlhttp.responseText);
+					var data = JSON.parse(xmlhttp.responseText);  //convierte una cadena en un objeto JSON
+					console.log(data);
+					if (resultado.innerHTML === "")
+					{
+						for (var i in data) 
+						{
+							resultado.innerHTML +="Mi "+ data[i].Parentezco+" se llama "+data[i].Nombre +" "+data[i].Apellido +"<hr/>";
+							console.log(data[i].Nombre);
+						}
+					}
+				}
+			}
+		
+		xmlhttp.open("GET" , "datos.json" , true);  
+		xmlhttp.send();
 }

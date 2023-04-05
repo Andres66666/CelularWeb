@@ -1,3 +1,11 @@
+body{
+    background-image: url(https://i.pinimg.com/originals/a7/d6/42/a7d642879d23bc7b963b15a6e8535609.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    opacity: 1.5;
+}
 .calculadora{
     background-image: url(https://i.pinimg.com/236x/d0/3c/22/d03c224feb61b074bc4e092364e9e4cf.jpg);
     background-repeat: no-repeat;
@@ -13,8 +21,8 @@
     height:640px;
     border-radius: 25px;
 
-    margin-top: 100px;
-    margin-left: 100px;
+    margin-top: 250px;
+    margin-left: 1100px;
     }
     .calculadora td button{
     display:block;
@@ -45,6 +53,9 @@
         background-color: #000000;
         color: aliceblue;
         margin-bottom: -30px;
+    }
+    .button {
+        text-decoration: none;
     }
     #llamar{
         background-color: rgb(38, 202, 106);

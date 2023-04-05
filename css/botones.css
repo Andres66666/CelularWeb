@@ -1,13 +1,27 @@
+body{
+    background-image: url(https://images3.alphacoders.com/880/thumb-1920-88057.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    opacity: 1.5;
+}
+
 .calculadora{
     display:block;
     margin:0 auto;
     padding:20px;
-    background-color:rgb(0, 0, 0);
+    background-image: url(https://i.pinimg.com/550x/a8/6b/23/a86b237651fb76f27a36a89c40f26f3a.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 1.5;
+    
     width:290px;
     height:640px;
     border-radius: 25px;
-    margin-top: 100px;
-    margin-left: 50px;
+    margin-top: 250px;
+    margin-left: 1100px;
     }
     .calculadora td button{
     display:block;
@@ -25,7 +39,7 @@
     width:245px;
     height: 50px;
     line-height: 50px;
-    background-color:#000000;
+  
     border-radius: 10px;
     color: aliceblue;
     }
@@ -38,7 +52,7 @@
     width:245px;
     height: 80px;
     line-height: 80px;
-    background-color:rgb(0, 0, 0);
+   
     border-radius: 10px;
     color: aliceblue;
     }
@@ -48,6 +62,9 @@
     button{
         background-color: #000000;
         color: aliceblue;
+    }
+    .button {
+        text-decoration: none;
     }
     #llamar{
         background-color: rgb(38, 202, 106);
