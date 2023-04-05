@@ -108,11 +108,9 @@ llamar.onclick = function(e){
         document("huste se comunico con el numero " + resultado.textContent);
         ajax_json_array();
     } 
-    
-
-    
 }
-var resultado = document.getElementById("info");
+var resultado1 = document.getElementById("info");
+resultado1=numero;
 function ajax_json_array()
     {
         var xmlhttp;
@@ -133,20 +131,21 @@ function ajax_json_array()
                 //alert(xmlhttp.responseText);
                 var data = JSON.parse(xmlhttp.responseText);  //convierte una cadena en un objeto JSON
                 console.log(data);
-                if (resultado.innerHTML === "")
+                if (resultado1.innerHTML === "")
                 {
                     for (var i in data) 
                     {
-                        resultado.innerHTML +="Mi "+ data[i].Parentezco+" se llama "+data[i].Nombre +" "+data[i].Apellido +"<hr/>";
+                        resultado1.innerHTML +="se llama "+ data[i].nombre+" tiene el numero "+data[i].telefono +"<hr/>";
                         console.log(data[i].Nombre);
                     }
                 }
             }
         }
     
-    xmlhttp.open("GET" , "numeros.json" , true);  
-    xmlhttp.send();
+        xmlhttp.open("GET" , "numeros.json" , true);  
+        xmlhttp.send();
     }
+
 function llamando(){
     const llamarBtn = document.getElementById("llamar");
     const click = new Audio("../audios/llamando.mp3");
@@ -194,41 +193,4 @@ function eliminarNumeroHistorial() {
     let nuevoResultado = historial.slice(0, -1);
     document.getElementById("historial").innerHTML = nuevoResultado;
 }
-}
-
-var resultado = document.getElementById("info");
-
-		function ajax_json_array()
-		{
-			var xmlhttp;
-
-			if(window.XMLHttpRequest)
-			{
-				xmlhttp = new XMLHttpRequest();
-			}
-			else
-			{
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-
-			xmlhttp.onreadystatechange = function()
-			{
-				if (xmlhttp.readyState === 4 && xmlhttp.status === 200) 
-				{
-					//alert(xmlhttp.responseText);
-					var data = JSON.parse(xmlhttp.responseText);  //convierte una cadena en un objeto JSON
-					console.log(data);
-					if (resultado.innerHTML === "")
-					{
-						for (var i in data) 
-						{
-							resultado.innerHTML +="Mi "+ data[i].Parentezco+" se llama "+data[i].Nombre +" "+data[i].Apellido +"<hr/>";
-							console.log(data[i].Nombre);
-						}
-					}
-				}
-			}
-		
-		xmlhttp.open("GET" , "datos.json" , true);  
-		xmlhttp.send();
 }
