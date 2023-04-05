@@ -106,54 +106,8 @@ llamar.onclick = function(e){
     }else{
         llamando();
         document("huste se comunico con el numero " + resultado.textContent);
-   
-        agregar_datos();
     } 
 }
-var r = document.getElementById("info");
-	var datos = [];
-
-	function ajax_json_array() {
-		var xmlhttp;
-
-		if(window.XMLHttpRequest) {
-			xmlhttp = new XMLHttpRequest();
-		}
-		else {
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-				var data = JSON.parse(xmlhttp.responseText);
-				datos = data;
-				actualizar_datos();
-			}
-		}
-	
-		xmlhttp.open("GET" , "../json/numeros.json" , true);
-		xmlhttp.send();
-	}
-
-	function actualizar_datos() {
-		r.innerHTML = "";
-		for (var i in datos) {
-			r.innerHTML += "se llama "+ datos[i].nombre+" tiene el telefono "+datos[i].telefono +" "+"<hr/>";
-		}
-	}
-
-	function agregar_datos() {
-		var nombre = document.getElementById("nombre").value;
-		var nuevo_dato = {
-			nombre: "andres",
-			telefono:resultado.textContent,
-			
-		};
-		datos.push(nuevo_dato);
-		actualizar_datos();
-		document.getElementById("nombre").value = "";
-	}
-
 
 function llamando(){
     const llamarBtn = document.getElementById("llamar");
