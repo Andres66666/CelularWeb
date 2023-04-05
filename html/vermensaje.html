@@ -11,102 +11,44 @@
     <div class="container">
         <div class="header">
           <h2>Abel</h2>
+          <a href="../index.html"><button class="exit-button"> Salir</button></a>
         </div>
         <div class="messages">
-          <!-- aquí se mostrarían los mensajes -->
+          <div id="info"></div>
         </div>
         <form class="message-form">
           <input id="message-input" type="text" placeholder="Escribe tu mensaje aquí...">
           <button class="send-button"><img src="../img/mensaje.png" alt="" width="20" height="20"></button>
           <button class="delete-button">⌫</button>
+          <button type="button" onclick="ajax_json_array()">👁</button>
         </form>
       </div>
 
-<script type="text/javascript">
-  const messageForm = document.querySelector('.message-form');
-  const messageInput = document.querySelector('#message-input');
-  const messagesDiv = document.querySelector('.messages');
-
-  messageForm.addEventListener('submit', (event) => {
-    // Evitar que se recargue la página al enviar el formulario
-    event.preventDefault();
-
-    // Obtener el texto del mensaje
-    const messageText = messageInput.value;
-
-    // Crear un nuevo elemento "p" para mostrar el mensaje
-    const newMessage = document.createElement('p');
-    newMessage.textContent = messageText;
-
-    // Agregar el nuevo elemento al div de mensajes
-    messagesDiv.appendChild(newMessage);
-
-    // Limpiar el campo de texto
-    messageInput.value = '';
-  });
-</script>
-<!--
-  /*
-        function sendMessage(message) {
-  // Crear un objeto con los datos del mensaje
-  var data = {message: message};
-
-  // Convertir el objeto en formato JSON
-  var jsonData = JSON.stringify(data);
-
-  // Enviar el mensaje a través de Ajax
-  $.ajax({
-    type: 'POST',
-    url: '/api/send-message',
-    data: jsonData,
-    contentType: 'application/json',
-    success: function(response) {
-      console.log(response);
-      // Actualizar los mensajes en la vista
-      updateMessages(response);
-    },
-    error: function(error) {
-      console.log(error);
-    }
-  });
-}
-function receiveMessages() {
-  // Obtener los mensajes a través de Ajax
-  $.ajax({
-    type: 'GET',
-    url: '/api/receive-messages',
-    contentType: 'application/json',
-    success: function(response) {
-      console.log(response);
-      // Actualizar los mensajes en la vista
-      updateMessages(response);
-    },
-    error: function(error) {
-      console.log(error);
-    }
-  });
-}
-function updateMessages(messages) {
-  var messagesDiv = $('.messages');
-  messagesDiv.empty();
-  for (var i = 0; i < messages.length; i++) {
-    var message = messages[i];
-    var messageText = message.message;
-    var messageDiv = $('<div>').text(messageText);
-    messagesDiv.append(messageDiv);
-  }
-}
-setInterval(function() {
-  receiveMessages();
-}, 1000);
-
-$('.message-form').on('submit', function(e) {
-  e.preventDefault();
-  var message = $('input[type=text]').val();
-  sendMessage(message);
-  $('input[type=text]').val('');
-});
-*/
--->
+      <script type="text/javascript">
+      var resultado = document.getElementById("info");
+      var datos = [];
+    
+      function ajax_json_array() {
+        var xmlhttp;
+    
+        if(window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest();
+        }
+        else {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    
+        xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            var data = JSON.parse(xmlhttp.responseText);
+            datos = data;
+            actualizar_datos();
+          }
+        }
+      
+        xmlhttp.open("GET" , "mensajes.json" , true);
+        xmlhttp.send();
+      }
+      </script>
   </body>
 </html>
