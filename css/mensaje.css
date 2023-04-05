@@ -51,6 +51,7 @@ body{
     color: #ddd;
     font-size: 20px;
     font-weight: bold;
+    opacity: 1.5;
   }
   .message-form {
     display: flex;
@@ -89,7 +90,7 @@ body{
     margin-left: 10px
   }
   .botonesextras{
-    margin-top: 60px;
+    margin-top: 20px;
   }
   .botonesalir1{
     margin-left: 60px;

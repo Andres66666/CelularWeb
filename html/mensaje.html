@@ -23,44 +23,36 @@
       </div>
 
 <script type="text/javascript">
-  const messageForm = document.querySelector('.message-form');
-  const messageInput = document.querySelector('#message-input');
-  const messagesDiv = document.querySelector('.messages');
+const messageForm = document.querySelector('.message-form');
+const messageInput = document.querySelector('#message-input');
+const messagesDiv = document.querySelector('.messages');
 
-  messageForm.addEventListener('submit', (event) => {
-    // Evitar que se recargue la página al enviar el formulario
-    event.preventDefault();
+messageForm.addEventListener('submit', (event) => {
+  event.preventDefault();
 
-    // Obtener el texto del mensaje
-    const messageText = messageInput.value;
+  const messageText = messageInput.value;
+  const newMessage = document.createElement('p');
+  newMessage.textContent = messageText;
+  messagesDiv.appendChild(newMessage);
+  messageInput.value = '';
 
-    // Crear un nuevo elemento "p" para mostrar el mensaje localmente
-    const newMessage = document.createElement('p');
-    newMessage.textContent = messageText;
+  // Envía el mensaje al servidor
+  fetch('/enviar_mensaje', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: messageText })
+  });
+});
 
-    // Agregar el nuevo elemento al div de mensajes localmente
-    messagesDiv.appendChild(newMessage);
-
-    // Limpiar el campo de texto
-    messageInput.value = '';
-
-    // Enviar el mensaje remotamente con Ajax
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/enviar_mensaje');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-
-        // Crear un nuevo elemento "p" para mostrar la respuesta del servidor
-        const newResponse = document.createElement('p');
-        newResponse.textContent = response.message;
-
-        // Agregar el nuevo elemento al div de mensajes
-        messagesDiv.appendChild(newResponse);
-      }
-    };
-    xhr.send(JSON.stringify({ message: messageText }));
+// Carga los mensajes del servidor al iniciar la página
+fetch('/ver_mensajes')
+  .then(response => response.json())
+  .then(messages => {
+    messages.forEach(message => {
+      const newMessage = document.createElement('p');
+      newMessage.textContent = message;
+      messagesDiv.appendChild(newMessage);
+    });
   });
 </script>
 <!--
