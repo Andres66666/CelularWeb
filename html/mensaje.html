@@ -16,66 +16,115 @@
           <!-- aquí se mostrarían los mensajes -->
         </div>
         <form class="message-form">
-          <input type="text" placeholder="Escribe tu mensaje aquí...">
+          <input id="message-input" type="text" placeholder="Escribe tu mensaje aquí...">
           <button class="send-button"><img src="../img/mensaje.png" alt="" width="20" height="20"></button>
           <button class="delete-button">⌫</button>
         </form>
-
-        <div class="botonesextras">
-            <a href="../index.html" class="botonesalir1"><button id="atras">◁</button></a>
-            <a href="../index.html" class="botonesalir2"><button id="salir">◉</button></a>
-        </div>
       </div>
-      
-      <script>
-        var tabla = [
-            { mensaje: "Hola"}
-    ];
 
-    window.onload = cargarEventos;
+<script type="text/javascript">
+  const messageForm = document.querySelector('.message-form');
+  const messageInput = document.querySelector('#message-input');
+  const messagesDiv = document.querySelector('.messages');
 
-    function cargarEventos(){
-        document.getElementById("mostrar-tabla").addEventListener("click", mostrarTabla, false);
-        document.getElementById("message-form").addEventListener("submit", nuevoMensaje, false);
+  messageForm.addEventListener('submit', (event) => {
+    // Evitar que se recargue la página al enviar el formulario
+    event.preventDefault();
+
+    // Obtener el texto del mensaje
+    const messageText = messageInput.value;
+
+    // Crear un nuevo elemento "p" para mostrar el mensaje localmente
+    const newMessage = document.createElement('p');
+    newMessage.textContent = messageText;
+
+    // Agregar el nuevo elemento al div de mensajes localmente
+    messagesDiv.appendChild(newMessage);
+
+    // Limpiar el campo de texto
+    messageInput.value = '';
+
+    // Enviar el mensaje remotamente con Ajax
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/enviar_mensaje');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+
+        // Crear un nuevo elemento "p" para mostrar la respuesta del servidor
+        const newResponse = document.createElement('p');
+        newResponse.textContent = response.message;
+
+        // Agregar el nuevo elemento al div de mensajes
+        messagesDiv.appendChild(newResponse);
+      }
+    };
+    xhr.send(JSON.stringify({ message: messageText }));
+  });
+</script>
+<!--
+  /*
+        function sendMessage(message) {
+  // Crear un objeto con los datos del mensaje
+  var data = {message: message};
+
+  // Convertir el objeto en formato JSON
+  var jsonData = JSON.stringify(data);
+
+  // Enviar el mensaje a través de Ajax
+  $.ajax({
+    type: 'POST',
+    url: '/api/send-message',
+    data: jsonData,
+    contentType: 'application/json',
+    success: function(response) {
+      console.log(response);
+      // Actualizar los mensajes en la vista
+      updateMessages(response);
+    },
+    error: function(error) {
+      console.log(error);
     }
-    function mostrarTabla(){
-        var cuerpoTabla = document.getElementById("equipos-tabla");
-        var tablaLlena = "";
-
-        for (var i = 0; i < tabla.length; i++){
-            tablaLlena += "<tr><td>" + tabla[i].mensaje + "</tr><td>";
-        }
-        cuerpoTabla.innerHTML = tablaLlena;
-    }
-    function nuevoMensaje(event){
-        event.preventDefault();
-
-        var mensajeIntroducidoPorUsuario = document.getElementById("sms").value;
- 
-
-        var nuevoMensaje = { mensaje: mensajeIntroducidoPorUsuario};
-        tabla.push(nuevoMensaje);
-    }
-    </script>
-
-
-      <script>
-        function receiveMessages() {
-  const url = 'http://ejemplo.com/mensajes.json';
-  
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const messagesElement = document.querySelector('.messages');
-      messagesElement.innerHTML = '';
-      data.forEach(message => {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message.text;
-        messagesElement.appendChild(messageElement);
-      });
-    })
-    .catch(error => console.error(error));
+  });
 }
-      </script>
-</body>
+function receiveMessages() {
+  // Obtener los mensajes a través de Ajax
+  $.ajax({
+    type: 'GET',
+    url: '/api/receive-messages',
+    contentType: 'application/json',
+    success: function(response) {
+      console.log(response);
+      // Actualizar los mensajes en la vista
+      updateMessages(response);
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  });
+}
+function updateMessages(messages) {
+  var messagesDiv = $('.messages');
+  messagesDiv.empty();
+  for (var i = 0; i < messages.length; i++) {
+    var message = messages[i];
+    var messageText = message.message;
+    var messageDiv = $('<div>').text(messageText);
+    messagesDiv.append(messageDiv);
+  }
+}
+setInterval(function() {
+  receiveMessages();
+}, 1000);
+
+$('.message-form').on('submit', function(e) {
+  e.preventDefault();
+  var message = $('input[type=text]').val();
+  sendMessage(message);
+  $('input[type=text]').val('');
+});
+*/
+-->
+  </body>
 </html>
