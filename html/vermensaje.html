@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/mensaje.css">
+    <style>
+      .textyob{
+        background-color: aliceblue;
+      
+      }
+      .textyob p{
+        color: aliceblue;
+        background-color: aliceblue;
+      }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,17 +24,81 @@
           <a href="../index.html"><button class="exit-button"> Salir</button></a>
         </div>
         <div class="messages">
-          <div id="info"></div>
+          
         </div>
         <form class="message-form">
           <input id="message-input" type="text" placeholder="Escribe tu mensaje aquí...">
           <button class="send-button"><img src="../img/mensaje.png" alt="" width="20" height="20"></button>
           <button class="delete-button">⌫</button>
-          <button type="button" onclick="ajax_json_array()">👁</button>
+          <button type="button" onclick="verMisMensajes()" class="textyob">👁</button>
         </form>
       </div>
 
+      
+
       <script type="text/javascript">
+        const messageForm = document.querySelector('.message-form');
+        const messageInput = document.querySelector('#message-input');
+        const messagesDiv = document.querySelector('.messages');
+      
+        const viewMyMessagesButton = document.querySelector('.view-my-messages-button');
+        
+        messageForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+        
+          const messageText = messageInput.value;
+          const newMessage = document.createElement('p');
+          newMessage.textContent = messageText;
+          messagesDiv.appendChild(newMessage);
+          messageInput.value = '';
+        
+          // Almacena el mensaje en el localStorage
+          const user = 'Abel'; // Reemplazar con el usuario actual
+          let userMessages = JSON.parse(localStorage.getItem(user)) || [];
+          userMessages.push(messageText);
+          localStorage.setItem(user, JSON.stringify(userMessages));
+        
+          // Envía el mensaje al servidor
+          fetch('/enviar_mensaje', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user: user, message: messageText })
+          });
+        });
+        
+        // Función para ver todos los mensajes
+        function verMensajes() {
+          fetch('/ver_mensajes')
+            .then(response => response.json())
+            .then(messages => {
+              const allMessagesDiv = document.createElement('div');
+              allMessagesDiv.classList.add('all-messages');
+              messages.forEach(message => {
+                const newMessage = document.createElement('p');
+                newMessage.textContent = message;
+                allMessagesDiv.appendChild(newMessage);
+              });
+              messagesDiv.parentNode.insertBefore(allMessagesDiv, messagesDiv.nextSibling);
+              viewMessagesButton.disabled = true;
+            });
+        }
+        
+        // Función para ver los mensajes del usuario actual
+        function verMisMensajes() {
+          const user = 'Abel'; // Reemplazar con el usuario actual
+          const userMessages = JSON.parse(localStorage.getItem(user)) || [];
+        
+          const myMessagesDiv = document.createElement('div');
+          myMessagesDiv.classList.add('my-messages');
+          userMessages.forEach(message => {
+            const newMessage = document.createElement('p');
+            newMessage.textContent = message;
+            myMessagesDiv.appendChild(newMessage);
+          });
+          messagesDiv.parentNode.insertBefore(myMessagesDiv, messagesDiv.nextSibling);
+          viewMyMessagesButton.disabled = true;
+        }
+        /*
       var resultado = document.getElementById("info");
       var datos = [];
     
@@ -48,7 +122,7 @@
       
         xmlhttp.open("GET" , "mensajes.json" , true);
         xmlhttp.send();
-      }
+      }*/
       </script>
   </body>
 </html>

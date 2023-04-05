@@ -8,77 +8,88 @@
     <link rel="stylesheet" href="../css/mensaje.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-          <h2>Abel</h2>
-          <a href="../index.html"><button class="exit-button"> Salir</button></a>
-          
-        </div>
-        <div class="messages">
-          <!-- aquí se mostrarían los mensajes -->
-        </div>
-        <form class="message-form">
-          <input id="message-input" type="text" placeholder="Escribe tu mensaje aquí...">
-          <button class="send-button"><img src="../img/mensaje.png" alt="" width="20" height="20"></button>
-          <button class="delete-button">⌫</button>
-        </form>
-      </div>
+  <div class="container">
+    <div class="header">
+      <h2>Abel</h2>
+      <a href="../index.html"><button class="exit-button">Salir</button></a>
+    </div>
+    <div class="messages">
+      <!-- aquí se mostrarían los mensajes -->
+    </div>
+    
+    <form class="message-form">
+      <input id="message-input" type="text" placeholder="Escribe tu mensaje aquí...">
+      <button class="send-button"><img src="../img/mensaje.png" alt="" width="20" height="20"></button>
+      <button class="delete-button">⌫</button>
+    </form>
+    <div class="button-container">
+      
+      <button class="view-my-messages-button" onclick="verMisMensajes()">👀 Ver mis mensajes</button>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+  const messageForm = document.querySelector('.message-form');
+  const messageInput = document.querySelector('#message-input');
+  const messagesDiv = document.querySelector('.messages');
 
-<script type="text/javascript">
-const CACHE_NAME = 'mensaje-cache';
-
-// Escucha el evento 'install' para crear la caché
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll([
-          '/index.html',
-          '/script.js',
-          '/styles.css',
-        ]);
-      })
-  );
-});
-
-// Escucha el evento 'fetch' para recuperar los mensajes de la caché
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
-
-        return fetch(event.request)
-          .then((response) => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          });
-      })
-  );
-});
-
-// Escucha el evento 'message' para guardar los mensajes en la caché
-self.addEventListener('message', (event) => {
-  if (event.data.message) {
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        cache.add(event.data.message);
+  const viewMyMessagesButton = document.querySelector('.view-my-messages-button');
+  
+  messageForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+  
+    const messageText = messageInput.value;
+    const newMessage = document.createElement('p');
+    newMessage.textContent = messageText;
+    messagesDiv.appendChild(newMessage);
+    messageInput.value = '';
+  
+    // Almacena el mensaje en el localStorage
+    const user = 'Abel'; // Reemplazar con el usuario actual
+    let userMessages = JSON.parse(localStorage.getItem(user)) || [];
+    userMessages.push(messageText);
+    localStorage.setItem(user, JSON.stringify(userMessages));
+  
+    // Envía el mensaje al servidor
+    fetch('/enviar_mensaje', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: user, message: messageText })
+    });
+  });
+  
+  // Función para ver todos los mensajes
+  function verMensajes() {
+    fetch('/ver_mensajes')
+      .then(response => response.json())
+      .then(messages => {
+        const allMessagesDiv = document.createElement('div');
+        allMessagesDiv.classList.add('all-messages');
+        messages.forEach(message => {
+          const newMessage = document.createElement('p');
+          newMessage.textContent = message;
+          allMessagesDiv.appendChild(newMessage);
+        });
+        messagesDiv.parentNode.insertBefore(allMessagesDiv, messagesDiv.nextSibling);
+        viewMessagesButton.disabled = true;
       });
   }
-});
-
-</script>
+  
+  // Función para ver los mensajes del usuario actual
+  function verMisMensajes() {
+    const user = 'Abel'; // Reemplazar con el usuario actual
+    const userMessages = JSON.parse(localStorage.getItem(user)) || [];
+  
+    const myMessagesDiv = document.createElement('div');
+    myMessagesDiv.classList.add('my-messages');
+    userMessages.forEach(message => {
+      const newMessage = document.createElement('p');
+      newMessage.textContent = message;
+      myMessagesDiv.appendChild(newMessage);
+    });
+    messagesDiv.parentNode.insertBefore(myMessagesDiv, messagesDiv.nextSibling);
+    viewMyMessagesButton.disabled = true;
+  }
+  </script>
   </body>
 </html>
