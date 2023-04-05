@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="chat">
+        <div id="messages"></div>
+        <form id="message-form">
+            <input type="text" id="message-input">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Cargar los mensajes guardados al inicio de la página
+            $.getJSON('mensajes.json', function(data) {
+                $.each(data, function(index, message) {
+                    $('#messages').append('<p>' + message + '</p>');
+                });
+            });
+
+            // Enviar el mensaje y guardarlo en el archivo JSON
+            $('#message-form').submit(function(event) {
+                event.preventDefault();
+
+                var message = $('#message-input').val();
+                $('#message-input').val('');
+
+                $.getJSON('mensajes.json', function(data) {
+                    data.push(message);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'guardar_mensaje.php',
+                        data: {messages: data},
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function(response) {
+                            console.log(response);
+                        }
+                    });
+                });
+
+                $('#messages').append('<p>' + message + '</p>');
+            });
+        });
+    </script>
+</body>
+</html>

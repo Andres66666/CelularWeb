@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo de guardado de mensajes con JSON</title>
+</head>
+<body>
+    <h1>Guardado de mensajes con JSON</h1>
+    <form>
+        <label for="mensaje">Mensaje:</label>
+        <input type="text" id="mensaje" name="mensaje">
+        <button type="submit" id="enviar">Enviar mensaje</button>
+    </form>
+
+    <script>
+        const formulario = document.querySelector('form');
+        const mensajeInput = document.querySelector('#mensaje');
+
+        formulario.addEventListener('submit', (evento) => {
+            evento.preventDefault();
+
+            const mensaje = mensajeInput.value;
+            const data = {mensaje: mensaje};
+
+            fetch('guardar_mensaje.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }).then(response => {
+                console.log('Mensaje guardado exitosamente');
+                mensajeInput.value = '';
+            }).catch(error => {
+                console.error('Error al guardar el mensaje:', error);
+            });
+        });
+    </script>
+</body>
+</html>
